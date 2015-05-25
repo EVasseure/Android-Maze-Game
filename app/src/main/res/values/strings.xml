@@ -11,6 +11,11 @@
     <string name="settings">Settings</string>
     <string name="nameasking">Hi! Please enter your name bellow. :)</string>
     <string name="validate">Let\'s go!</string>
+    <string name="giveup">Give up</string>
+    <string name="okay">Okay!</string>
+    <string name="goodjob">Good job, you won!</string>
+
+    <!-- Settings -->
 
 
 </resources>

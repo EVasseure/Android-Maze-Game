@@ -1,19 +1,27 @@
 package com.potatoinc.mazeaddict.Ui;
 
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Chronometer;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.potatoinc.mazeaddict.Bus.PopBackStackEvent;
+import com.potatoinc.mazeaddict.Bus.WinEvent;
+import com.potatoinc.mazeaddict.Model.User;
 import com.potatoinc.mazeaddict.R;
 import com.potatoinc.mazeaddict.View.Maze;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 import de.greenrobot.event.EventBus;
 
 public class MazeFragment extends Fragment {
@@ -21,15 +29,22 @@ public class MazeFragment extends Fragment {
     @InjectView(R.id.fragment_maze_maze)
     protected Maze maze;
 
+    @InjectView(R.id.fragment_maze_timer)
+    protected Chronometer chronometer;
+
+    @InjectView(R.id.fragment_maze_timer_text)
+    protected TextView timerTextView;
+
+    @InjectView(R.id.fragment_maze_win)
+    protected RelativeLayout winLayout;
+
     private float swipStartX;
     private float swipEndX;
     private float swipStartY;
     private float swipEndY;
+    private long countUp;
 
     private float MIN_SWIP_DIST = 50;
-
-    // private Handler frame = new Handler();
-    // private static final int FRAME_RATE = 20; //50 frames per second
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,15 +53,30 @@ public class MazeFragment extends Fragment {
         addTouchListener(rootView);
 
         ButterKnife.inject(this, rootView);
-        /*Handler h = new Handler();
-        h.postDelayed(new Runnable() {
+
+        chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener(){
             @Override
-            public void run() {
-                frame.postDelayed(frameUpdate, FRAME_RATE);
+            public void onChronometerTick(Chronometer arg0) {
+                countUp = (SystemClock.elapsedRealtime() - arg0.getBase()) / 1000;
+                String asText = (countUp / 60) + ":" + (countUp % 60);
+                timerTextView.setText(asText);
             }
-        }, 1000);*/
+        });
+        chronometer.start();
 
         return rootView;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
     }
 
     private void addTouchListener(View view)
@@ -88,12 +118,33 @@ public class MazeFragment extends Fragment {
         });
     }
 
-    /*private Runnable frameUpdate = new Runnable() {
-        @Override
-        synchronized public void run() {
-            frame.removeCallbacks(frameUpdate);
-            maze.invalidate();
-            frame.postDelayed(frameUpdate, FRAME_RATE);
-        }
-    };*/
+    @Override
+    public void onResume() {
+        super.onResume();
+        maze.resume();
+    };
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        maze.pause();
+    };
+
+    @OnClick (R.id.fragment_maze_giveup_button)
+    public void onGiveUp()
+    {
+        EventBus.getDefault().post(new PopBackStackEvent());
+    }
+
+    // FIXME display points directly
+    @SuppressWarnings("unused")
+    public void onEvent(WinEvent winEvent) {
+        winLayout.setVisibility(View.VISIBLE);
+    }
+
+    @OnClick (R.id.fragment_maze_win_validate)
+    public void onClickOkay()
+    {
+        EventBus.getDefault().post(new PopBackStackEvent());
+    }
 }

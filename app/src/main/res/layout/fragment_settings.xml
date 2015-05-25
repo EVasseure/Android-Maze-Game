@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <TextView
+            android:id="@+id/fragment_settings_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/settings"
+            android:textColor="@color/dark_grey"
+            android:textSize="45sp"/>
+
+        <RelativeLayout
+            android:id="@+id/fragment_settings_size_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/fragment_settings_title">
+
+            <TextView
+                android:id="@+id/fragment_settings_size_title"
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:text="Size"
+                android:textColor="@color/dark_grey"
+                android:textSize="22sp"/>
+
+            <View
+                android:layout_width="250dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="15dp"
+                android:layout_toRightOf="@+id/fragment_settings_size_title"
+                android:layout_alignBaseline="@+id/fragment_settings_size_title"
+                android:background="@color/dark_grey"/>
+
+            <TextView
+                android:id="@+id/fragment_settings_size_width_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/fragment_settings_size_title"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="35dp"
+                android:text="Width"
+                android:textSize="18sp"
+                android:textColor="@color/dark_grey"/>
+
+            <TextView
+                android:id="@+id/fragment_settings_size_height_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/fragment_settings_size_width_text"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="35dp"
+                android:text="Height"
+                android:textSize="18sp"
+                android:textColor="@color/dark_grey"/>
+
+            </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/fragment_settings_others_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_below="@+id/fragment_settings_size_layout">
+
+            <TextView
+                android:id="@+id/fragment_settings_others_title"
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:text="Other"
+                android:textColor="@color/dark_grey"
+                android:textSize="22sp"/>
+
+            <View
+                android:layout_width="250dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="15dp"
+                android:layout_toRightOf="@+id/fragment_settings_others_title"
+                android:layout_alignBaseline="@+id/fragment_settings_others_title"
+                android:background="@color/dark_grey"/>
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/fragment_settings_validate_button"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/fragment_settings_others_layout"
+            android:layout_marginTop="50dp"
+            android:text="@string/okay"
+            android:background="@drawable/button"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

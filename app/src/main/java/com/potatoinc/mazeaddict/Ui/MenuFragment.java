@@ -11,7 +11,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.potatoinc.mazeaddict.Bus.NameChoosenEvent;
+import com.potatoinc.mazeaddict.Bus.PopBackStackEvent;
 import com.potatoinc.mazeaddict.Bus.SwitchFragmentEvent;
+import com.potatoinc.mazeaddict.Bus.WinEvent;
 import com.potatoinc.mazeaddict.Model.User;
 import com.potatoinc.mazeaddict.R;
 
@@ -50,6 +52,18 @@ public class MenuFragment extends Fragment {
         return rootView;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
+    }
+
     @OnClick(R.id.fragment_menu_play_button)
     public void launchGame()
     {
@@ -59,7 +73,7 @@ public class MenuFragment extends Fragment {
     @OnClick(R.id.fragment_menu_settings_button)
     public void showSettings()
     {
-        Toast.makeText(getActivity(), "Soon", Toast.LENGTH_SHORT).show();
+        EventBus.getDefault().post(new SwitchFragmentEvent(new SettingsFragment(), SwitchFragmentEvent.Direction.VERTICAL, false, true));
     }
 
     @OnClick(R.id.fragment_menu_namegetter_validate)
@@ -69,5 +83,12 @@ public class MenuFragment extends Fragment {
         username.setText(User.username + "!");
         nameGetterLayout.setVisibility(View.GONE);
         EventBus.getDefault().post(new NameChoosenEvent(User.username));
+    }
+
+    // FIXME display points directly
+    @SuppressWarnings("unused")
+    public void onEvent(WinEvent winEvent) {
+        User.points += 10;
+        score.setText(User.points + " points.");
     }
 }

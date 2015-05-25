@@ -6,7 +6,7 @@ package com.potatoinc.mazeaddict.Model;
 public class Settings {
 
     // FIXME laod from user data
-    public static int mazeWidth = 19;
-    public static int mazeHeight = 19;
+    public static int mazeWidth = 35;
+    public static int mazeHeight = 35;
 
 }

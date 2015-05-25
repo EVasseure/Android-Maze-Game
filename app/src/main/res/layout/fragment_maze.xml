@@ -2,19 +2,103 @@
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:context="com.potatoinc.mazeaddict.Ui.MazeFragment"
-    android:background="@color/white">
+                android:background="@color/white"
+                tools:context="com.potatoinc.mazeaddict.Ui.MazeFragment">
 
     <RelativeLayout
-        android:layout_width="300dp"
-        android:layout_height="500dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerInParent="true">
 
-        <com.potatoinc.mazeaddict.View.Maze
-            android:id="@+id/fragment_maze_maze"
+
+        <Chronometer
+            android:id="@+id/fragment_maze_timer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/fragment_maze_timer_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="03:25"
+            android:textSize="26sp"/>
+
+        <RelativeLayout
+            android:id="@+id/fragment_maze_layout"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_below="@+id/fragment_maze_timer_text"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="20dp">
+
+            <com.potatoinc.mazeaddict.View.Maze
+                android:id="@+id/fragment_maze_maze"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"/>
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/fragment_maze_giveup_button"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/fragment_maze_layout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/button"
+            android:text="@string/giveup"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/fragment_maze_win"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <View
+            android:id="@+id/fragment_maze_win_overlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/dark_grey"
+            android:alpha="0.8"
+            android:clickable="true"/>
+
+        <View
+            android:id="@+id/fragment_maze_win_background"
+            android:layout_width="250dp"
+            android:layout_height="110dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/button_filled"/>
+
+        <TextView
+            android:id="@+id/fragment_maze_win_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"/>
+            android:layout_centerHorizontal="true"
+            android:layout_alignTop="@+id/fragment_maze_win_background"
+            android:layout_marginTop="10dp"
+            android:layout_alignLeft="@+id/fragment_maze_win_background"
+            android:layout_marginLeft="5dp"
+            android:layout_alignRight="@+id/fragment_maze_win_background"
+            android:layout_marginRight="5dp"
+            android:text="@string/goodjob"
+            android:textColor="@color/dark_grey"
+            android:textSize="20sp"
+            android:gravity="center"/>
+
+        <Button
+            android:id="@+id/fragment_maze_win_validate"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/fragment_maze_win_message"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/button"
+            android:text="@string/okay"/>
+
     </RelativeLayout>
 
 </RelativeLayout>

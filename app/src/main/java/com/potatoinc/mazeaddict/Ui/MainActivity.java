@@ -8,7 +8,9 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 
 import com.potatoinc.mazeaddict.Bus.NameChoosenEvent;
+import com.potatoinc.mazeaddict.Bus.PopBackStackEvent;
 import com.potatoinc.mazeaddict.Bus.SwitchFragmentEvent;
+import com.potatoinc.mazeaddict.Bus.WinEvent;
 import com.potatoinc.mazeaddict.Model.User;
 import com.potatoinc.mazeaddict.R;
 
@@ -25,20 +27,32 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        menuFragment = new MenuFragment();
+        loadData();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.main_container, menuFragment)
+                .commit();
+
+    }
+
+    private void loadData()
+    {
         sharedPref = this.getPreferences(Context.MODE_PRIVATE);
 
         String username = sharedPref.getString("NAME", "none");
         Integer points = sharedPref.getInt("POINTS", 0);
         User.username = username;
         User.points = points;
+    }
 
-        menuFragment = new MenuFragment();
-
-        getSupportFragmentManager()
-                .beginTransaction()
-                .add(R.id.main_container, menuFragment)
-                .commit();
-
+    private void saveData()
+    {
+        sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt("POINTS", User.points);
+        editor.putString("NAME", User.username);
+        editor.apply();
     }
 
     @Override
@@ -50,6 +64,7 @@ public class MainActivity extends FragmentActivity {
     @Override
     public void onStop() {
         EventBus.getDefault().unregister(this);
+        saveData();
         super.onStop();
     }
 
@@ -88,7 +103,12 @@ public class MainActivity extends FragmentActivity {
     public void onEvent(NameChoosenEvent nameChoosenEvent) {
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString("NAME", nameChoosenEvent.getName());
-        editor.commit();
+        editor.apply();
+    }
+
+    @SuppressWarnings("unused")
+    public void onEvent(PopBackStackEvent popBackStackEvent) {
+        getSupportFragmentManager().popBackStack();
     }
 
 }
