@@ -223,8 +223,8 @@ public class Maze extends SurfaceView implements Runnable
 
     private void drawMaze(Canvas canvas)
     {
-        width = Settings.mazeWidth;
-        heigth = Settings.mazeHeight;
+        width = Settings.mazeSize + Settings.mazeSize % 2;
+        heigth = Settings.mazeSize + Settings.mazeSize % 2;
 
 
 

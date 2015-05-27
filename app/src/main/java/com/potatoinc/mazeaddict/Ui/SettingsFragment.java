@@ -11,7 +11,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.potatoinc.mazeaddict.Bus.NameChoosenEvent;
+import com.potatoinc.mazeaddict.Bus.PopBackStackEvent;
 import com.potatoinc.mazeaddict.Bus.SwitchFragmentEvent;
+import com.potatoinc.mazeaddict.Model.Settings;
 import com.potatoinc.mazeaddict.Model.User;
 import com.potatoinc.mazeaddict.R;
 
@@ -25,13 +27,29 @@ import de.greenrobot.event.EventBus;
  */
 public class SettingsFragment extends Fragment {
 
+    @InjectView(R.id.fragment_settings_size_size_value)
+    EditText sizeValue;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_settings, container, false);
         ButterKnife.inject(this, rootView);
 
+        sizeValue.setText(String.valueOf(Settings.mazeSize));
+
         return rootView;
     }
 
+    @OnClick(R.id.fragment_settings_validate_button)
+    public void onValidate()
+    {
+        if (Integer.parseInt(sizeValue.getText().toString()) < 25 || Integer.parseInt(sizeValue.getText().toString()) > 150)
+        {
+            Toast.makeText(getActivity(), "The maze size must be between 25 and 150", Toast.LENGTH_LONG).show();
+            return;
+        }
+        Settings.mazeSize = Integer.parseInt(sizeValue.getText().toString());
+        EventBus.getDefault().post(new PopBackStackEvent());
+    }
 }

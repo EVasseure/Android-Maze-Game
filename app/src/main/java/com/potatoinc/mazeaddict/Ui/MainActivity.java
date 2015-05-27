@@ -11,6 +11,7 @@ import com.potatoinc.mazeaddict.Bus.NameChoosenEvent;
 import com.potatoinc.mazeaddict.Bus.PopBackStackEvent;
 import com.potatoinc.mazeaddict.Bus.SwitchFragmentEvent;
 import com.potatoinc.mazeaddict.Bus.WinEvent;
+import com.potatoinc.mazeaddict.Model.Settings;
 import com.potatoinc.mazeaddict.Model.User;
 import com.potatoinc.mazeaddict.R;
 
@@ -40,10 +41,9 @@ public class MainActivity extends FragmentActivity {
     {
         sharedPref = this.getPreferences(Context.MODE_PRIVATE);
 
-        String username = sharedPref.getString("NAME", "none");
-        Integer points = sharedPref.getInt("POINTS", 0);
-        User.username = username;
-        User.points = points;
+        User.username = sharedPref.getString("NAME", "none");
+        User.points = sharedPref.getInt("POINTS", 0);
+        Settings.mazeSize = sharedPref.getInt("MSIZE", 25);
     }
 
     private void saveData()
@@ -52,6 +52,7 @@ public class MainActivity extends FragmentActivity {
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putInt("POINTS", User.points);
         editor.putString("NAME", User.username);
+        editor.putInt("MSIZE", Settings.mazeSize);
         editor.apply();
     }
 

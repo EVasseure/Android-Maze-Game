@@ -13,6 +13,7 @@
             android:id="@+id/fragment_settings_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
             android:gravity="center"
             android:text="@string/settings"
             android:textColor="@color/dark_grey"
@@ -26,42 +27,27 @@
 
             <TextView
                 android:id="@+id/fragment_settings_size_title"
-                android:layout_width="55dp"
+                android:layout_width="125dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
-                android:text="Size"
+                android:text="Size (25 - 150)"
                 android:textColor="@color/dark_grey"
-                android:textSize="22sp"/>
+                android:textSize="18sp"/>
 
-            <View
-                android:layout_width="250dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="15dp"
+            <EditText
+                android:id="@+id/fragment_settings_size_size_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
                 android:layout_toRightOf="@+id/fragment_settings_size_title"
                 android:layout_alignBaseline="@+id/fragment_settings_size_title"
-                android:background="@color/dark_grey"/>
-
-            <TextView
-                android:id="@+id/fragment_settings_size_width_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/fragment_settings_size_title"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="35dp"
-                android:text="Width"
-                android:textSize="18sp"
-                android:textColor="@color/dark_grey"/>
-
-            <TextView
-                android:id="@+id/fragment_settings_size_height_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/fragment_settings_size_width_text"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="35dp"
-                android:text="Height"
-                android:textSize="18sp"
-                android:textColor="@color/dark_grey"/>
+                android:inputType="number"
+                android:background="@drawable/button"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:text="100"/>
 
             </RelativeLayout>
 

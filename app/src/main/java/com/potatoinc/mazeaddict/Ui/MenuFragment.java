@@ -14,6 +14,7 @@ import com.potatoinc.mazeaddict.Bus.NameChoosenEvent;
 import com.potatoinc.mazeaddict.Bus.PopBackStackEvent;
 import com.potatoinc.mazeaddict.Bus.SwitchFragmentEvent;
 import com.potatoinc.mazeaddict.Bus.WinEvent;
+import com.potatoinc.mazeaddict.Model.Settings;
 import com.potatoinc.mazeaddict.Model.User;
 import com.potatoinc.mazeaddict.R;
 
@@ -88,7 +89,7 @@ public class MenuFragment extends Fragment {
     // FIXME display points directly
     @SuppressWarnings("unused")
     public void onEvent(WinEvent winEvent) {
-        User.points += 10;
+        User.points += Settings.mazeSize;
         score.setText(User.points + " points.");
     }
 }
