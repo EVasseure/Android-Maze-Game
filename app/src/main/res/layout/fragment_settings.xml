@@ -30,23 +30,21 @@
                 android:layout_width="125dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
-                android:text="Size (25 - 150)"
+                android:text="@string/size"
                 android:textColor="@color/dark_grey"
                 android:textSize="18sp"/>
 
             <EditText
                 android:id="@+id/fragment_settings_size_size_value"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="22dp"
                 android:layout_marginLeft="25dp"
                 android:layout_toRightOf="@+id/fragment_settings_size_title"
-                android:layout_alignBaseline="@+id/fragment_settings_size_title"
+                android:layout_alignBottom="@+id/fragment_settings_size_title"
                 android:inputType="number"
                 android:background="@drawable/button"
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
-                android:paddingTop="4dp"
-                android:paddingBottom="4dp"
                 android:text="100"/>
 
             </RelativeLayout>
@@ -63,7 +61,7 @@
                 android:layout_width="55dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
-                android:text="Other"
+                android:text="@string/other"
                 android:textColor="@color/dark_grey"
                 android:textSize="22sp"/>
 
@@ -74,6 +72,51 @@
                 android:layout_toRightOf="@+id/fragment_settings_others_title"
                 android:layout_alignBaseline="@+id/fragment_settings_others_title"
                 android:background="@color/dark_grey"/>
+
+            <TextView
+                android:id="@+id/fragment_settings_others_turning_back_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="35dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/no_turning_back"
+                android:textColor="@color/dark_grey"
+                android:textSize="18sp"
+                android:layout_below="@+id/fragment_settings_others_title"/>
+
+            <ToggleButton
+                android:id="@+id/fragment_settings_others_turning_back_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="22dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="30dp"
+                android:layout_alignBottom="@+id/fragment_settings_others_turning_back_text"
+                android:textOn="@string/yes"
+                android:textOff="@string/no"
+                android:background="@drawable/button"/>
+
+            <TextView
+                android:id="@+id/fragment_settings_others_trail_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="35dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/trail"
+                android:textColor="@color/dark_grey"
+                android:textSize="18sp"
+                android:layout_below="@+id/fragment_settings_others_turning_back_text"/>
+
+            <ToggleButton
+                android:id="@+id/fragment_settings_others_trail_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="22dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="30dp"
+                android:layout_alignBottom="@+id/fragment_settings_others_trail_text"
+                android:layout_marginLeft="20dp"
+                android:textOn="@string/yes"
+                android:textOff="@string/no"
+                android:background="@drawable/button"/>
 
         </RelativeLayout>
 

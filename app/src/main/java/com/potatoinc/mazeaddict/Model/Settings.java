@@ -5,4 +5,6 @@ package com.potatoinc.mazeaddict.Model;
  */
 public class Settings {
     public static int mazeSize = 25;
+    public static boolean trail = true;
+    public static boolean noTurningBack = false;
 }

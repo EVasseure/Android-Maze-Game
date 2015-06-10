@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.potatoinc.mazeaddict.Bus.NameChoosenEvent;
 import com.potatoinc.mazeaddict.Bus.PopBackStackEvent;
@@ -30,6 +31,12 @@ public class SettingsFragment extends Fragment {
     @InjectView(R.id.fragment_settings_size_size_value)
     EditText sizeValue;
 
+    @InjectView(R.id.fragment_settings_others_trail_switch)
+    ToggleButton trailToggle;
+
+    @InjectView(R.id.fragment_settings_others_turning_back_switch)
+    ToggleButton turningBackToggle;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -37,6 +44,8 @@ public class SettingsFragment extends Fragment {
         ButterKnife.inject(this, rootView);
 
         sizeValue.setText(String.valueOf(Settings.mazeSize));
+        trailToggle.setChecked(Settings.trail);
+        turningBackToggle.setChecked(Settings.noTurningBack);
 
         return rootView;
     }
@@ -51,5 +60,17 @@ public class SettingsFragment extends Fragment {
         }
         Settings.mazeSize = Integer.parseInt(sizeValue.getText().toString());
         EventBus.getDefault().post(new PopBackStackEvent());
+    }
+
+    @OnClick(R.id.fragment_settings_others_turning_back_switch)
+    public void onTurningBackClick()
+    {
+        Settings.noTurningBack = turningBackToggle.isChecked();
+    }
+
+    @OnClick(R.id.fragment_settings_others_trail_switch)
+    public void onTrailClick()
+    {
+        Settings.trail = trailToggle.isChecked();
     }
 }

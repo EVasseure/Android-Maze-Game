@@ -8,7 +8,9 @@ import android.graphics.Point;
 import android.util.AttributeSet;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.widget.Toast;
 
+import com.potatoinc.mazeaddict.Bus.LoseEvent;
 import com.potatoinc.mazeaddict.Bus.WinEvent;
 import com.potatoinc.mazeaddict.Model.Settings;
 import com.potatoinc.mazeaddict.R;
@@ -22,7 +24,6 @@ import de.greenrobot.event.EventBus;
  */
 public class Maze extends SurfaceView implements Runnable
 {
-
     volatile boolean running = false;
     private SurfaceHolder holder;
     private Thread renderThread = null;
@@ -34,7 +35,8 @@ public class Maze extends SurfaceView implements Runnable
     private Paint black;
     private Paint white;
     private Paint orange;
-    private Paint light_orange;
+    private Paint blue;
+    private Paint lightBlue;
     private Integer SIZE = 15;
 
     private Point start;
@@ -42,6 +44,7 @@ public class Maze extends SurfaceView implements Runnable
     private Integer width;
     private Integer heigth;
     private Boolean[][] cells;
+    private Boolean[][] visitedCells;
     private ArrayList<Point> moves;
 
     public Maze(Context context, AttributeSet attrs)
@@ -188,6 +191,7 @@ public class Maze extends SurfaceView implements Runnable
                     vCells[i][j] = true;
             }
 
+        visitedCells[playerPosition.x][playerPosition.y] = true;
         vCells[playerPosition.x][playerPosition.y] = true;
         playerPosition = dir;
 
@@ -223,10 +227,13 @@ public class Maze extends SurfaceView implements Runnable
 
     private void drawMaze(Canvas canvas)
     {
-        width = Settings.mazeSize + Settings.mazeSize % 2;
-        heigth = Settings.mazeSize + Settings.mazeSize % 2;
+        width = Settings.mazeSize;
+        heigth = Settings.mazeSize;
 
-
+        if (width % 2 == 0)
+            width += 1;
+        if (heigth % 2 == 0)
+            heigth += 1;
 
         scaleCanvas(canvas);
 
@@ -238,16 +245,22 @@ public class Maze extends SurfaceView implements Runnable
             white.setColor(getResources().getColor(R.color.white));
             orange = new Paint();
             orange.setColor(getResources().getColor(R.color.orange));
-            light_orange = new Paint();
-            light_orange.setColor(getResources().getColor(R.color.blue));
+            blue = new Paint();
+            blue.setColor(getResources().getColor(R.color.blue));
+            lightBlue = new Paint();
+            lightBlue.setColor(getResources().getColor(R.color.light_blue));
 
-            start = new Point(1, heigth / 2);
-            end = new Point(width - 1, heigth / 2);
+            start = new Point(1, 1);
+            end = new Point(width - 1, heigth - 2);
             playerPosition = start;
             cells = new Boolean[width][heigth];
+            visitedCells = new Boolean[width][heigth];
             for (int i = 0; i < width; i++)
                 for (int j = 0; j < heigth; j++)
+                {
                     cells[i][j] = false;
+                    visitedCells[i][j] = false;
+                }
             create_maze();
             created = true;
         }
@@ -259,9 +272,11 @@ public class Maze extends SurfaceView implements Runnable
                 int ni = i * SIZE;
                 int nj = j * SIZE;
                 if (i == playerPosition.x && j == playerPosition.y)
-                    canvas.drawRect(ni, nj, SIZE + ni, SIZE + nj, light_orange);
+                    canvas.drawRect(ni, nj, SIZE + ni, SIZE + nj, blue);
                 else if (i == end.x && j == end.y)
                     canvas.drawRect(ni, nj, SIZE + ni, SIZE + nj, orange);
+                else if (Settings.trail && visitedCells[i][j])
+                    canvas.drawRect(ni, nj, SIZE + ni, SIZE + nj, lightBlue);
                 else if (cells[i][j])
                     canvas.drawRect(ni, nj, SIZE + ni, SIZE + nj, white);
                 else
@@ -307,7 +322,18 @@ public class Maze extends SurfaceView implements Runnable
         }
         if (moves.size() != 0)
         {
+            visitedCells[playerPosition.x][playerPosition.y] = true;
             playerPosition = moves.remove(0);
+            if (Settings.noTurningBack && visitedCells[playerPosition.x][playerPosition.y])
+                ((Activity)getContext()).runOnUiThread(new Runnable()
+                {
+                    @Override
+                    public void run()
+                    {
+                        EventBus.getDefault().post(new LoseEvent());
+                        ended = true;
+                    }
+                });
         }
     }
 

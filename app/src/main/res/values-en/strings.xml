@@ -1,7 +1,4 @@
 <resources>
-    <string name="app_name">Maze Addict</string>
-    <string name="app_url">com.cubeactive.qnotelistfree</string>
-
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
@@ -29,4 +26,6 @@
     <string name="no_turning_back">No turning back</string>
     <string name="trail">Leave trail</string>
     <string name="size">Size (25 - 150)</string>
+
+
 </resources>

@@ -1,5 +1,8 @@
 package com.potatoinc.mazeaddict.Ui;
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v4.app.Fragment;
@@ -13,7 +16,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.potatoinc.mazeaddict.Bus.DrawingDoneEvent;
+import com.potatoinc.mazeaddict.Bus.GiveUpEvent;
+import com.potatoinc.mazeaddict.Bus.LoseEvent;
 import com.potatoinc.mazeaddict.Bus.PopBackStackEvent;
+import com.potatoinc.mazeaddict.Bus.ValidateWinEvent;
 import com.potatoinc.mazeaddict.Bus.WinEvent;
 import com.potatoinc.mazeaddict.Model.User;
 import com.potatoinc.mazeaddict.R;
@@ -35,6 +42,9 @@ public class MazeFragment extends Fragment {
     @InjectView(R.id.fragment_maze_timer_text)
     protected TextView timerTextView;
 
+    @InjectView(R.id.fragment_maze_win_message)
+    protected TextView winMessage;
+
     @InjectView(R.id.fragment_maze_win)
     protected RelativeLayout winLayout;
 
@@ -43,6 +53,7 @@ public class MazeFragment extends Fragment {
     private float swipStartY;
     private float swipEndY;
     private long countUp;
+    private boolean win;
 
     private float MIN_SWIP_DIST = 50;
 
@@ -133,18 +144,25 @@ public class MazeFragment extends Fragment {
     @OnClick (R.id.fragment_maze_giveup_button)
     public void onGiveUp()
     {
-        EventBus.getDefault().post(new PopBackStackEvent());
+        EventBus.getDefault().post(new GiveUpEvent());
     }
 
-    // FIXME display points directly
     @SuppressWarnings("unused")
     public void onEvent(WinEvent winEvent) {
+        win = true;
+        winLayout.setVisibility(View.VISIBLE);
+    }
+
+    @SuppressWarnings("unused")
+    public void onEvent(LoseEvent loseEvent) {
+        win = false;
+        winMessage.setText(getResources().getString(R.string.lost));
         winLayout.setVisibility(View.VISIBLE);
     }
 
     @OnClick (R.id.fragment_maze_win_validate)
     public void onClickOkay()
     {
-        EventBus.getDefault().post(new PopBackStackEvent());
+        EventBus.getDefault().post(new ValidateWinEvent(win));
     }
 }
