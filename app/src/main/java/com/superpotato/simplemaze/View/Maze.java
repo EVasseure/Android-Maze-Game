@@ -1,4 +1,4 @@
-package com.potatoinc.mazeaddict.View;
+package com.superpotato.simplemaze.View;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,12 +8,11 @@ import android.graphics.Point;
 import android.util.AttributeSet;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.widget.Toast;
 
-import com.potatoinc.mazeaddict.Bus.LoseEvent;
-import com.potatoinc.mazeaddict.Bus.WinEvent;
-import com.potatoinc.mazeaddict.Model.Settings;
-import com.potatoinc.mazeaddict.R;
+import com.superpotato.simplemaze.Bus.LoseEvent;
+import com.superpotato.simplemaze.Bus.WinEvent;
+import com.superpotato.simplemaze.Model.Settings;
+import com.superpotato.simplemaze.R;
 
 import java.util.ArrayList;
 

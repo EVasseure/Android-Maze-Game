@@ -1,4 +1,4 @@
-package com.potatoinc.mazeaddict.Ui;
+package com.superpotato.simplemaze.Ui;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -7,14 +7,13 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 
-import com.potatoinc.mazeaddict.Bus.NameChoosenEvent;
-import com.potatoinc.mazeaddict.Bus.PopBackStackEvent;
-import com.potatoinc.mazeaddict.Bus.SwitchFragmentEvent;
-import com.potatoinc.mazeaddict.Bus.SwitchToMazeFragmentEvent;
-import com.potatoinc.mazeaddict.Bus.WinEvent;
-import com.potatoinc.mazeaddict.Model.Settings;
-import com.potatoinc.mazeaddict.Model.User;
-import com.potatoinc.mazeaddict.R;
+import com.superpotato.simplemaze.Bus.NameChoosenEvent;
+import com.superpotato.simplemaze.Bus.PopBackStackEvent;
+import com.superpotato.simplemaze.Bus.SwitchFragmentEvent;
+import com.superpotato.simplemaze.Bus.SwitchToMazeFragmentEvent;
+import com.superpotato.simplemaze.Model.Settings;
+import com.superpotato.simplemaze.Model.User;
+import com.superpotato.simplemaze.R;
 
 import de.greenrobot.event.EventBus;
 

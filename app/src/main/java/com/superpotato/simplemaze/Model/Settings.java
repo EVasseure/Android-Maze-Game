@@ -1,4 +1,4 @@
-package com.potatoinc.mazeaddict.Model;
+package com.superpotato.simplemaze.Model;
 
 /**
  * Created by Erwan on 24/05/2015.

@@ -3,7 +3,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/white"
-                tools:context="com.potatoinc.mazeaddict.Ui.MazeFragment">
+                tools:context="com.superpotato.simplemaze.Ui.MazeFragment">
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -34,7 +34,7 @@
             android:layout_centerInParent="true"
             android:layout_marginTop="20dp">
 
-            <com.potatoinc.mazeaddict.View.Maze
+            <com.superpotato.simplemaze.View.Maze
                 android:id="@+id/fragment_maze_maze"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -50,6 +50,45 @@
             android:layout_marginTop="20dp"
             android:background="@drawable/button"
             android:text="@string/giveup"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/fragment_maze_info"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/dark_grey"
+            android:alpha="0.8"
+            android:clickable="true"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="25sp"
+            android:text="@string/info_maze"
+            android:layout_above="@+id/arrow"
+            android:textColor="@color/white"/>
+
+        <ImageView
+            android:id="@+id/arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow"
+            android:layout_centerInParent="true"/>
+
+        <Button
+            android:id="@+id/help_okay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_filled"
+            android:text="@string/okay"
+            android:layout_below="@+id/arrow"
+            android:layout_centerHorizontal="true"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -86,7 +125,7 @@
             android:layout_marginRight="5dp"
             android:text="@string/goodjob"
             android:textColor="@color/dark_grey"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:gravity="center"/>
 
         <Button

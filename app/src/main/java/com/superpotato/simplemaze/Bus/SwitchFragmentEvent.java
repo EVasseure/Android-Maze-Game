@@ -1,4 +1,4 @@
-package com.potatoinc.mazeaddict.Bus;
+package com.superpotato.simplemaze.Bus;
 
 import android.support.v4.app.Fragment;
 

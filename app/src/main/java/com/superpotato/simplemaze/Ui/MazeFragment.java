@@ -1,12 +1,8 @@
-package com.potatoinc.mazeaddict.Ui;
+package com.superpotato.simplemaze.Ui;
 
-import android.animation.Animator;
-import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -14,17 +10,14 @@ import android.view.ViewGroup;
 import android.widget.Chronometer;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.potatoinc.mazeaddict.Bus.DrawingDoneEvent;
-import com.potatoinc.mazeaddict.Bus.GiveUpEvent;
-import com.potatoinc.mazeaddict.Bus.LoseEvent;
-import com.potatoinc.mazeaddict.Bus.PopBackStackEvent;
-import com.potatoinc.mazeaddict.Bus.ValidateWinEvent;
-import com.potatoinc.mazeaddict.Bus.WinEvent;
-import com.potatoinc.mazeaddict.Model.User;
-import com.potatoinc.mazeaddict.R;
-import com.potatoinc.mazeaddict.View.Maze;
+import com.superpotato.simplemaze.Bus.GiveUpEvent;
+import com.superpotato.simplemaze.Bus.LoseEvent;
+import com.superpotato.simplemaze.Bus.ValidateWinEvent;
+import com.superpotato.simplemaze.Bus.WinEvent;
+import com.superpotato.simplemaze.Model.User;
+import com.superpotato.simplemaze.R;
+import com.superpotato.simplemaze.View.Maze;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -48,6 +41,9 @@ public class MazeFragment extends Fragment {
     @InjectView(R.id.fragment_maze_win)
     protected RelativeLayout winLayout;
 
+    @InjectView(R.id.fragment_maze_info)
+    protected RelativeLayout infoLayout;
+
     private float swipStartX;
     private float swipEndX;
     private float swipStartY;
@@ -64,6 +60,11 @@ public class MazeFragment extends Fragment {
         addTouchListener(rootView);
 
         ButterKnife.inject(this, rootView);
+
+        if (User.nb_games == 0)
+        {
+            infoLayout.setVisibility(View.VISIBLE);
+        }
 
         chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener(){
             @Override
@@ -164,5 +165,11 @@ public class MazeFragment extends Fragment {
     public void onClickOkay()
     {
         EventBus.getDefault().post(new ValidateWinEvent(win));
+    }
+
+    @OnClick (R.id.help_okay)
+    public void onValidate()
+    {
+        infoLayout.setVisibility(View.GONE);
     }
 }

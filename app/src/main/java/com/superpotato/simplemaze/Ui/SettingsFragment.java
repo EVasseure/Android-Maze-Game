@@ -1,4 +1,4 @@
-package com.potatoinc.mazeaddict.Ui;
+package com.superpotato.simplemaze.Ui;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -6,17 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-import com.potatoinc.mazeaddict.Bus.NameChoosenEvent;
-import com.potatoinc.mazeaddict.Bus.PopBackStackEvent;
-import com.potatoinc.mazeaddict.Bus.SwitchFragmentEvent;
-import com.potatoinc.mazeaddict.Model.Settings;
-import com.potatoinc.mazeaddict.Model.User;
-import com.potatoinc.mazeaddict.R;
+import com.superpotato.simplemaze.Bus.PopBackStackEvent;
+import com.superpotato.simplemaze.Model.Settings;
+import com.superpotato.simplemaze.R;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -55,7 +50,7 @@ public class SettingsFragment extends Fragment {
     {
         if (Integer.parseInt(sizeValue.getText().toString()) < 25 || Integer.parseInt(sizeValue.getText().toString()) > 150)
         {
-            Toast.makeText(getActivity(), "The maze size must be between 25 and 150", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), R.string.wrongsize, Toast.LENGTH_LONG).show();
             return;
         }
         Settings.mazeSize = Integer.parseInt(sizeValue.getText().toString());
