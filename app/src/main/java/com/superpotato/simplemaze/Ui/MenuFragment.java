@@ -1,7 +1,6 @@
-package com.potatoinc.mazeaddict.Ui;
+package com.superpotato.simplemaze.Ui;
 
 import android.animation.Animator;
-import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.app.AlertDialog;
@@ -20,16 +19,15 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.potatoinc.mazeaddict.Bus.GiveUpEvent;
-import com.potatoinc.mazeaddict.Bus.NameChoosenEvent;
-import com.potatoinc.mazeaddict.Bus.PopBackStackEvent;
-import com.potatoinc.mazeaddict.Bus.SwitchFragmentEvent;
-import com.potatoinc.mazeaddict.Bus.SwitchToMazeFragmentEvent;
-import com.potatoinc.mazeaddict.Bus.ValidateWinEvent;
-import com.potatoinc.mazeaddict.Bus.WinEvent;
-import com.potatoinc.mazeaddict.Model.Settings;
-import com.potatoinc.mazeaddict.Model.User;
-import com.potatoinc.mazeaddict.R;
+import com.superpotato.simplemaze.Bus.GiveUpEvent;
+import com.superpotato.simplemaze.Bus.NameChoosenEvent;
+import com.superpotato.simplemaze.Bus.PopBackStackEvent;
+import com.superpotato.simplemaze.Bus.SwitchFragmentEvent;
+import com.superpotato.simplemaze.Bus.SwitchToMazeFragmentEvent;
+import com.superpotato.simplemaze.Bus.ValidateWinEvent;
+import com.superpotato.simplemaze.Model.Settings;
+import com.superpotato.simplemaze.Model.User;
+import com.superpotato.simplemaze.R;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -129,6 +127,11 @@ public class MenuFragment extends Fragment {
     @OnClick(R.id.fragment_menu_namegetter_validate)
     public void validatename()
     {
+        if (nameEditText.getText().toString().length() < 4 || nameEditText.getText().toString().length() > 15)
+        {
+            Toast.makeText(getActivity(), R.string.invalidname, Toast.LENGTH_SHORT).show();
+            return;
+        }
         User.username = nameEditText.getText().toString();
         username.setText(User.username + "!");
         nameGetterLayout.setVisibility(View.GONE);

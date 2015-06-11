@@ -1,4 +1,4 @@
-package com.potatoinc.mazeaddict.Bus;
+package com.superpotato.simplemaze.Bus;
 
 /**
  * Created by Erwan on 24/05/2015.

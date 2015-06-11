@@ -1,4 +1,6 @@
 <resources>
+    <string name="app_name">Simple Maze</string>
+    <string name="app_url">com.potatoinc.mazeaddict</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
@@ -7,15 +9,17 @@
     <string name="score">Tu as</string>
     <string name="play">Jouer!</string>
     <string name="settings">Options</string>
-    <string name="nameasking">Bonjour! Entre ton nom s\'il te plait. :)</string>
+    <string name="nameasking">Bonjour! Entre ton nom s\'il te plait.</string>
     <string name="validate">Go!</string>
     <string name="giveup">Abandonner</string>
     <string name="okay">Okay!</string>
     <string name="goodjob">Bien joué, tu as gagné!</string>
     <string name="lost">Désolé, mauvais chemin, tu as perdu.</string>
+    <string name="invalidname">Désolé mais ton nom doit faire entre 4 et 15 lettres.</string>
+    <string name="wrongsize">La taille doit être entre 25 et 150.</string>
 
-    <string name="cant_open_market">Impossible d\'ouvrir le Google Player, veuillez l\'installer.</string>
-    <string name="start_rate_message">Vous avez résolu plusieurs labyrinthes, voudrai-tu noter l\'application ? Ta note nous est très important.</string>
+    <string name="cant_open_market">Impossible d\'ouvrir Google Play, veuillez l\'installer.</string>
+    <string name="start_rate_message">Vous avez résolu plusieurs labyrinthes, voudrais-tu noté l\'application ?.</string>
     <string name="rate_message">Tu vas être redirigé vers Google Play. Continuer ?</string>
     <string name="no_thank_you">Non merci.</string>
     <string name="yes">Oui!</string>
@@ -27,5 +31,6 @@
     <string name="trail">Laisser un trace</string>
     <string name="size">Taille (25 - 150)</string>
 
+    <string name="info_maze">Glisser pour se déplacer</string>
 
 </resources>
